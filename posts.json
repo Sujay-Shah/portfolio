@@ -1,0 +1,74 @@
+[
+  {
+    "id": "single-file-rhi",
+    "title": "From OOP to a Flat Vtable: Rethinking the RHI in a Single-File Architecture",
+    "description": "How an OOP class hierarchy spread across a dozen files became impossible to extend, and why collapsing it into a single flat vtable dispatch model made adding an entirely new graphics API (WebGPU) mechanical rather than architectural.",
+    "date": "Dec 28, 2025",
+    "readTime": "10 min read",
+    "tags": [
+      "C++",
+      "Vulkan",
+      "WebGPU",
+      "Engine Dev",
+      "Architecture"
+    ],
+    "filePath": "posts/single-file-rhi.md"
+  },
+  {
+    "id": "gpu-inflight-hazard",
+    "title": "GPU In-Flight Hazards: Why Resize Crashes and How to Fix It",
+    "description": "How a window resize event caused intermittent GPU crashes in Usul's editor, why the per-frame fence isn't enough to protect shared resources, and why vkDeviceWaitIdle is the correct tool for resource reallocation.",
+    "date": "July 4, 2026",
+    "readTime": "8 min read",
+    "tags": [
+      "Vulkan",
+      "C++",
+      "Engine Dev",
+      "Debugging"
+    ],
+    "filePath": "posts/gpu-inflight-hazard.md"
+  },
+  {
+    "id": "vulkan-descriptor-invalidation",
+    "title": "Descriptor Set Invalidation in Vulkan: The Hidden Rule About Mid-Loop Writes",
+    "description": "A deep dive into the Vulkan validation error that fires when you call vkUpdateDescriptorSets on a descriptor set that's still bound in a recording command buffer—and the three correct ways to fix it.",
+    "date": "June 28, 2026",
+    "readTime": "9 min read",
+    "tags": [
+      "Vulkan",
+      "C++",
+      "Engine Dev",
+      "Debugging"
+    ],
+    "filePath": "posts/vulkan-descriptor-invalidation.md"
+  },
+  {
+    "id": "imguizmo-flipped-y",
+    "title": "The Flipped-Y Problem: Why ImGuizmo Moves Entities the Wrong Way",
+    "description": "How Vulkan's negative-height viewport trick, ImGui UV compensation, and ImGuizmo's screen-space math all interact to invert gizmo Y-axis behavior—and the one-line projection matrix fix.",
+    "date": "June 28, 2026",
+    "readTime": "7 min read",
+    "tags": [
+      "Vulkan",
+      "ImGui",
+      "C++",
+      "Debugging",
+      "Engine Dev"
+    ],
+    "filePath": "posts/imguizmo-flipped-y.md"
+  },
+  {
+    "id": "wayland-first-principles",
+    "title": "Wayland Architecture from First Principles: A Deconstruction of the Modern Linux Display Server",
+    "description": "An in-depth look at the first principles of Wayland's design, deconstructing how it eliminates architectural overhead to achieve its core design promise: 'Every frame is perfect.'",
+    "date": "Jan 28, 2026",
+    "readTime": "15 min read",
+    "tags": [
+      "Linux",
+      "Wayland",
+      "System Programming",
+      "C++"
+    ],
+    "filePath": "posts/Wayland_First_Principles_Architecture.md"
+  }
+]

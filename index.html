@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujay Shah | Graphics & Game Programmer Portfolio</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Portfolio of Sujay Shah, a Senior Software Engineer specializing in Graphics Programming, Vulkan/DX12 drivers, custom game engines, and console ports.">
+    <meta name="keywords" content="Graphics Programmer, Game Developer, Vulkan, DX12, C++, GPU, Wayland, Mesa, Adreno Driver, DigiPen">
+    <meta name="author" content="Sujay Shah">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Prism.js Tomorrow Night Theme for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js import map (bunny renderer) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Canvas for GPU/Mesh particle animation background -->
+    <canvas id="mesh-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="logo">
+            <a href="#home">
+                <span class="logo-name">SUJAY SHAH</span>
+                <span class="logo-tag">// GRAPHICS ENG</span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="#home" class="nav-item active" data-tab="home"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#experience" class="nav-item" data-tab="experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
+            <a href="#projects" class="nav-item" data-tab="projects"><i class="fa-solid fa-gamepad"></i> Projects</a>
+            <a href="#writeups" class="nav-item" data-tab="writeups"><i class="fa-solid fa-book-open"></i> Write-ups</a>
+        </nav>
+        <div class="header-socials">
+            <a href="https://github.com/Sujay-Shah" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shah-sujay" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:snshah93@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-overlay"></div>
+    <nav class="mobile-nav">
+        <a href="#home" class="mobile-nav-item active" data-tab="home"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#experience" class="mobile-nav-item" data-tab="experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
+        <a href="#projects" class="mobile-nav-item" data-tab="projects"><i class="fa-solid fa-gamepad"></i> Projects</a>
+        <a href="#writeups" class="mobile-nav-item" data-tab="writeups"><i class="fa-solid fa-book-open"></i> Write-ups</a>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="content-container">
+
+        <!-- 1. HOME TAB -->
+        <section id="home" class="tab-content active">
+            <!-- Hero Grid -->
+            <div class="hero-section">
+                <div class="hero-text animate-fade-in">
+                    <div class="badge">VULKAN & DX12 SPECIALIST</div>
+                    <h1 class="hero-title">High-Performance <br><span class="gradient-text">Graphics Engineer</span></h1>
+                    <p class="hero-description">
+                        Hi, I'm Sujay Shah. I specialize in designing Render Hardware Interfaces (RHIs), developing Vulkan drivers, and optimizing engine systems for PC and game consoles. Currently working across Mesa, Zink, DXVK, and VKD3D layers to enable desktop-class gaming on Adreno Vulkan drivers.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#projects" class="btn btn-primary" onclick="switchTab('projects')">View My Projects</a>
+                        <a href="#writeups" class="btn btn-secondary" onclick="switchTab('writeups')">Read Write-ups</a>
+                    </div>
+                </div>
+                <div class="hero-visual animate-slide-in">
+                    <div class="bunny-container">
+                        <canvas id="bunny-canvas"></canvas>
+                        <div class="bunny-tri-count" id="bunny-tri-count">▲ loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Showcase -->
+            <div class="skills-showcase">
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="skills-grid">
+                    <!-- Languages -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                        <h3>Languages</h3>
+                        <ul class="skill-list">
+                            <li>C++ (Modern C++17/20) <span class="exp-dot"></span></li>
+                            <li>C <span class="exp-dot"></span></li>
+                            <li>C# (Unity / C# Scripting) <span class="exp-dot m-partial"></span></li>
+                            <li>Python (Scripting & Tools) <span class="exp-dot m-partial"></span></li>
+                        </ul>
+                    </div>
+                    <!-- Graphics APIs -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-cubes"></i></div>
+                        <h3>Graphics APIs</h3>
+                        <ul class="skill-list">
+                            <li>Vulkan (Driver & App Dev) <span class="exp-dot"></span></li>
+                            <li>DirectX 12 (RHI Backend) <span class="exp-dot"></span></li>
+                            <li>OpenGL (Legacy & WebGL) <span class="exp-dot"></span></li>
+                            <li>GLSL / HLSL / SPIR-V <span class="exp-dot"></span></li>
+                        </ul>
+                    </div>
+                    <!-- Core Tools -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h3>Tools & Diagnostics</h3>
+                        <ul class="skill-list">
+                            <li>RenderDoc & GFXReconstruct <span class="exp-dot"></span></li>
+                            <li>PIX / Radeon GPU Profiler <span class="exp-dot"></span></li>
+                            <li>Unreal Engine 4 & 5 <span class="exp-dot"></span></li>
+                            <li>GDB / Visual Studio / Linux <span class="exp-dot"></span></li>
+                        </ul>
+                    </div>
+                    <!-- Workflows -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-code-compare"></i></div>
+                        <h3>Engine & Pipeline</h3>
+                        <ul class="skill-list">
+                            <li>RHI (Render Hardware Interface) <span class="exp-dot"></span></li>
+                            <li>Wayland WSI Integration <span class="exp-dot"></span></li>
+                            <li>Perforce / Git / SVN <span class="exp-dot"></span></li>
+                            <li>Console Optimization (Xbox/PS4) <span class="exp-dot"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. EXPERIENCE TAB -->
+        <section id="experience" class="tab-content">
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">A timeline of my contributions to GPU drivers, proprietary game engines, and AAA games.</p>
+            
+            <div class="timeline">
+                <!-- Job 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Aug 2024 - Present</div>
+                    <div class="timeline-content card-interactive" onclick="toggleTimelineDetail(this)">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="job-title">Senior Software Engineer</h3>
+                                <div class="job-company">ThunderSoft <span class="client-tag">(Client: Qualcomm)</span></div>
+                            </div>
+                            <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="job-summary">Collaborating on the Adreno Vulkan driver layer to enable modern game compatibility on Linux.</p>
+                        <div class="timeline-details">
+                            <ul class="detail-list">
+                                <li>Collaborated across multiple translation and translation technology layers (Mesa, Zink, DXVK, and VKD3D) to enable game execution on Linux using the Adreno Vulkan driver.</li>
+                                <li>Worked on driver-level bug fixing and patching missing Vulkan features inside the driver codebase for multiple architectures.</li>
+                                <li>Owned the **Wayland WSI (Window System Integration) layer** in the Adreno Vulkan driver and implemented the `zwp_linux_dmabuf_v1` buffer sharing protocol for zero-copy presentation.</li>
+                                <li>Unblocked teammates and provided key debugging support for low-level graphics system interactions.</li>
+                            </ul>
+                            <div class="tech-pills">
+                                <span class="pill">Vulkan</span>
+                                <span class="pill">Mesa</span>
+                                <span class="pill">Zink</span>
+                                <span class="pill">DXVK</span>
+                                <span class="pill">VKD3D</span>
+                                <span class="pill">Wayland WSI</span>
+                                <span class="pill">C++</span>
+                                <span class="pill">Linux Drivers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Jun 2022 - Sep 2023</div>
+                    <div class="timeline-content card-interactive" onclick="toggleTimelineDetail(this)">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="job-title">Software Engineer</h3>
+                                <div class="job-company">Visual Concepts</div>
+                            </div>
+                            <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="job-summary">UI and core system engineering on NBA 2K24 using a proprietary C++ engine.</p>
+                        <div class="timeline-details">
+                            <ul class="detail-list">
+                                <li>Diagnosed and fixed critical UI bugs for **NBA 2K24** within Visual Concepts' large-scale, proprietary C++ engine.</li>
+                                <li>Created dynamic season banners dynamically pulled from game servers, and designed smooth menu transitions using proprietary tooling.</li>
+                                <li>Optimized rendering paths for UI elements to maintain high framerate thresholds on target consoles.</li>
+                            </ul>
+                            <div class="tech-pills">
+                                <span class="pill">C++</span>
+                                <span class="pill">Proprietary Engine</span>
+                                <span class="pill">UI Architecture</span>
+                                <span class="pill">Perforce</span>
+                                <span class="pill">Console Optimization</span>
+                            </div>
+                            <div class="timeline-yt-wrapper">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/V-Ns4r77lro"
+                                    title="NBA 2K24 Official Trailer"
+                                    class="timeline-yt-embed"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Dec 2019 - May 2022</div>
+                    <div class="timeline-content card-interactive" onclick="toggleTimelineDetail(this)">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="job-title">Game Programmer</h3>
+                                <div class="job-company">RunGames</div>
+                            </div>
+                            <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="job-summary">Optimizing and porting third-person shooter "Scavengers" onto Xbox One and PS4 consoles.</p>
+                        <div class="timeline-details">
+                            <ul class="detail-list">
+                                <li>Optimized and ported **"Scavengers"** to Xbox and PS4 consoles, ensuring lightweight and high-performing runtime execution under rigid hardware restrictions.</li>
+                                <li>Created automated test pipelines using batch scripting to collect memory, GPU, and CPU statistics across coordinates on complex maps.</li>
+                                <li>Extended the Unreal Engine 4 codebase to add platform-specific console APIs supporting TRC (Technical Requirements Checklist) and XR specs.</li>
+                                <li>Debugged complex memory issues including allocations corruptions, lock contentions, and overall execution spikes.</li>
+                                <li>Developed UI rendering features for an undisclosed beat 'em up game project.</li>
+                            </ul>
+                            <div class="tech-pills">
+                                <span class="pill">C++</span>
+                                <span class="pill">Unreal Engine 4</span>
+                                <span class="pill">Xbox One</span>
+                                <span class="pill">PlayStation 4</span>
+                                <span class="pill">Memory Profiling</span>
+                                <span class="pill">Automation Scripts</span>
+                            </div>
+                            <div class="timeline-yt-wrapper">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/hvq9Ov6gXc4"
+                                    title="Scavengers Official Gameplay Trailer"
+                                    class="timeline-yt-embed"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">July 2019 - Nov 2019</div>
+                    <div class="timeline-content card-interactive" onclick="toggleTimelineDetail(this)">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="job-title">Graphics Programmer</h3>
+                                <div class="job-company">Confetti Interactive</div>
+                            </div>
+                            <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <p class="job-summary">Unreal Engine plugin development and engine maintenance.</p>
+                        <div class="timeline-details">
+                            <ul class="detail-list">
+                                <li>Developed and optimized the Primal Space System's **GPEG plugin for Unreal Engine**, integrating custom multi-core scheduling and thread synchronization locks.</li>
+                                <li>Maintained and resolved bugs inside **Forge**, a massive in-house multi-API rendering framework (supporting DX12, Vulkan, Metal).</li>
+                                <li>Collaborated daily with direct client teams and compiled weekly reports summarizing engine milestones.</li>
+                            </ul>
+                            <div class="tech-pills">
+                                <span class="pill">C++</span>
+                                <span class="pill">The Forge RHI</span>
+                                <span class="pill">Unreal Engine Plugins</span>
+                                <span class="pill">Concurrency & Multithreading</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PROJECTS TAB -->
+        <section id="projects" class="tab-content">
+            <h2 class="section-title">Engineering Projects</h2>
+            <p class="section-subtitle">Low-level rendering code, custom game engine subsystems, and shader implementations.</p>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-banner engine-banner">
+                        <span class="project-status">Active Development</span>
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Usul 3D Game Engine</h3>
+                        <p class="project-short">A custom, low-level C++ 3D Game Engine built from the ground up featuring an editor mode and multi-API abstraction layer.</p>
+                        <div class="project-meta">
+                            <span class="pill">C++20</span>
+                            <span class="pill">Vulkan</span>
+                            <span class="pill">DirectX 12</span>
+                            <span class="pill">RHI</span>
+                        </div>
+                        <button class="btn btn-project-details" onclick="openProjectDrawer('usul')">View Architecture & Specs <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-banner game-banner">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>3D Game: Odyssey</h3>
+                        <p class="project-short">A 3D Action-Adventure game engine codebase built by a team of 4. Acted as Engine Architect & Producer.</p>
+                        <div class="project-meta">
+                            <span class="pill">C++</span>
+                            <span class="pill">Resource Manager</span>
+                            <span class="pill">Scripting</span>
+                            <span class="pill">UI System</span>
+                        </div>
+                        <button class="btn btn-project-details" onclick="openProjectDrawer('odyssey')">View Demo & Details <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Project 3: DryEngine -->
+                <div class="project-card">
+                    <div class="project-banner dryengine-banner">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>DryEngine & Asteroids</h3>
+                        <p class="project-short">My first custom 2D game engine written in C++ from scratch, with a complete Asteroids shooter built on top of it.</p>
+                        <div class="project-meta">
+                            <span class="pill">C++</span>
+                            <span class="pill">2D Engine</span>
+                            <span class="pill">Game Loop</span>
+                            <span class="pill">Collision</span>
+                        </div>
+                        <button class="btn btn-project-details" onclick="openProjectDrawer('dryengine')">View Demo & Details <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Project 5: Eggnapped -->
+                <div class="project-card">
+                    <div class="project-banner eggnapped-banner">
+                        <i class="fa-solid fa-egg"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Eggnapped</h3>
+                        <p class="project-short">A 2D top-down roguelike with procedural dungeons and permadeath, built on a second-generation custom C++ engine.</p>
+                        <div class="project-meta">
+                            <span class="pill">C++</span>
+                            <span class="pill">Roguelike</span>
+                            <span class="pill">Procedural Gen</span>
+                            <span class="pill">ECS</span>
+                        </div>
+                        <button class="btn btn-project-details" onclick="openProjectDrawer('eggnapped')">View Demo & Details <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. WRITE-UPS TAB -->
+        <section id="writeups" class="tab-content">
+            <div class="blog-header">
+                <div>
+                    <h2 class="section-title">Technical Write-ups</h2>
+                    <p class="section-subtitle">Low-level concepts, driver development insights, and C++ tricks I pick up along the way.</p>
+                </div>
+                <div class="blog-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="blog-search" placeholder="Search write-ups...">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters by tag -->
+            <div class="blog-tags" id="blog-tags">
+                <button class="tag-filter-btn active" data-tag="all">All Topics</button>
+                <button class="tag-filter-btn" data-tag="Vulkan">Vulkan</button>
+                <button class="tag-filter-btn" data-tag="C++">C++</button>
+                <button class="tag-filter-btn" data-tag="Wayland">Wayland</button>
+                <button class="tag-filter-btn" data-tag="DirectX 12">DirectX 12</button>
+                <button class="tag-filter-btn" data-tag="Linux">Linux</button>
+            </div>
+
+            <!-- Blog posts list -->
+            <div class="blog-list" id="blog-posts-container">
+                <!-- Dynamic post cards loaded here -->
+                <div class="loading-state">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> Loading write-ups...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Side-Drawer for Project Specifications -->
+    <div class="drawer-overlay" id="project-drawer-overlay"></div>
+    <div class="drawer" id="project-drawer">
+        <button class="drawer-close-btn" onclick="closeProjectDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="drawer-body" id="project-drawer-content">
+            <!-- Dynamic Drawer Content goes here -->
+        </div>
+    </div>
+
+    <!-- Blog Full Reader Modal Overlay -->
+    <div class="reader-modal" id="blog-reader-modal">
+        <div class="reader-header-bar">
+            <div class="reader-progress-container">
+                <div class="reader-progress-bar" id="reader-progress"></div>
+            </div>
+            <div class="reader-nav">
+                <span class="reader-title-label">TECH WRITE-UP // READ MODE</span>
+                <button class="reader-close-btn" onclick="closeBlogReader()"><i class="fa-solid fa-xmark"></i> CLOSE</button>
+            </div>
+        </div>
+        <div class="reader-container">
+            <article class="reader-content" id="blog-reader-content">
+                <!-- Compiled markdown output goes here -->
+            </article>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer-bar">
+        <p>&copy; 2026 Sujay Shah. Built with C++ designer sensibilities using modern HTML5, CSS3, & JS.</p>
+        <div class="footer-status">
+            <span class="status-pulse"></span> SYSTEM: ONLINE
+        </div>
+    </footer>
+
+    <!-- Marked.js (Markdown parser) and Prism.js (Syntax Highlighter) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    
+    <!-- Core Application Script -->
+    <script src="app.js"></script>
+
+    <!-- Stanford Bunny LOD Renderer (ES module) -->
+    <script type="module">
+        import { initBunnyRenderer } from './bunny-renderer.js';
+        document.addEventListener('DOMContentLoaded', () => initBunnyRenderer());
+    </script>
+</body>
+</html>
