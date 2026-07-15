@@ -17,7 +17,7 @@ const projectSpecs = {
         ],
         githubUrl: "https://github.com/Sujay-Shah/Usul",
         // Set wasmUrl to the hosted path when ready. null = show 'coming soon' placeholder.
-        wasmUrl: null
+        wasmUrl: "https://usul-build.netlify.app/editor"
     },
     odyssey: {
         title: "3D Game: Odyssey",
